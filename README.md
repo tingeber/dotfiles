@@ -29,10 +29,19 @@ brew install zsh-autosuggestions zsh-syntax-highlighting eza zoxide
 
 ## Fonts
 
-We're using Meslo [Nerd Font](https://www.nerdfonts.com/).
+Let's get our fonts figured out first. We're using Meslo [Nerd Font](https://www.nerdfonts.com/).
+
+On Mac:
 
 ```sh
 brew tap homebrew/cask-fonts
+brew install font-meslo-lg-nerd-font
+```
+
+On linux:
+
+```sh
+brew tap homebrew/linux-fonts
 brew install font-meslo-lg-nerd-font
 ```
 
@@ -42,8 +51,6 @@ I stopped using ohmyzsh, easier to run the small list of apps directly, esp with
 
 ```sh
 brew install powerlevel10k
-echo "source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme" >> ~/.zshrc
-source ~/.zshrc
 ```
 
 you can run the wizard again with `p10k configure`
