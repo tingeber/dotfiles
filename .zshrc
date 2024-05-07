@@ -5,16 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-
-
-# User configuration
-
-
-# adding iterm2 shell integration at zsh login
-source ~/.iterm2_shell_integration.zsh
 
 # connecting to bashrc - TG
 
@@ -32,14 +23,22 @@ if [[ "$(uname)" == "Linux" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+if [[ "$(uname)" == "Darwin" ]]; then
+  # If you come from bash you might have to change your $PATH.
+  export PATH=$HOME/bin:/usr/local/bin:$PATH
+  # iterm2 shell integration at zsh login
+  source ~/.iterm2_shell_integration.zsh
+  # Connecting to homebrew's ruby versions (https://jekyllrb.com/docs/installation/macos/)
+  source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
+  source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
+fi
+
 # TG - connecting nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# TG connecting to homebrew's ruby versions (https://jekyllrb.com/docs/installation/macos/)
-source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
-source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
+
 source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
