@@ -21,7 +21,7 @@ config.font_size = 14
 config.line_height = 1.1
 
 
-config.default_cursor_style = 'BlinkingBlock'
+config.default_cursor_style = 'SteadyUnderline'
 -- Acceptable values are SteadyBlock, BlinkingBlock, SteadyUnderline, BlinkingUnderline, SteadyBar, and BlinkingBar
 
 -- config.enable_tab_bar = false
