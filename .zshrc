@@ -1,4 +1,3 @@
-
 # Homebrew path specification for linux installs:
 if [[ "$(uname)" == "Linux" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -13,6 +12,8 @@ if [[ "$(uname -p)" == "arm" ]]; then
   # zsh pretty things
   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # p10k source, because it's still the best one around
+  source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 fi
 
 
@@ -36,6 +37,8 @@ if [[ "$(uname -p)" == "i386" ]]; then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # history setup
 HISTFILE=$HOME/.zhistory
@@ -62,5 +65,3 @@ alias ls="eza --icons=always"
 eval "$(zoxide init zsh)"
 
 alias cd="z"
-
-eval "$(starship init zsh)"
