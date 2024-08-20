@@ -8,12 +8,25 @@ Make sure you're using `zsh` as your main shell. Here's a gist for you: https://
 
 Make sure you have installed [homebrew](brew.sh), then install git and stow (follow this [youtube tutorial](https://www.youtube.com/watch?v=y6XCebnB9gs))
 
+
+### Install git and stow
 ```sh
-brew install git
-brew install stow
+brew install git stow
+```
+### Install other useful stuff
+```sh
+brew install zsh-autosuggestions zsh-syntax-highlighting eza zoxide gh
 ```
 
-Set up git and stow as you would.
+Clone this repo inside your home folder and run stow from it:
+
+```sh
+cd ~/
+git clone git@github.com:tingeber/dotfiles.git
+cd dotfiles
+stow .
+```
+
 
 # Terminal tools
 
@@ -21,11 +34,8 @@ Thanks Josean for the tutorial: https://www.josean.com/posts/how-to-setup-alacri
 
 ## QoL tools
 
-`.zshrc` in this dotfiles repo is already set up for these tools:
+`.zshrc` in this dotfiles repo is already set up for `zsh-autosuggestions zsh-syntax-highlighting eza zoxide`
 
-```sh
-brew install zsh-autosuggestions zsh-syntax-highlighting eza zoxide
-```
 
 ## Fonts
 
@@ -34,8 +44,7 @@ Let's get our fonts figured out first. We're using Meslo [Nerd Font](https://www
 On Mac:
 
 ```sh
-brew tap homebrew/cask-fonts
-brew install font-meslo-lg-nerd-font
+brew install --cask font-meslo-lg-nerd-font
 ```
 
 On linux:
