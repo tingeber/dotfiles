@@ -39,7 +39,7 @@ if [[ "$(uname -p)" == "i386" ]]; then
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+ [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # history setup
 HISTFILE=$HOME/.zhistory
@@ -84,3 +84,6 @@ alias ls="eza --icons=always"
 eval "$(zoxide init zsh)"
 
 alias cd="z"
+
+# ---- Starship for a pretty prompt ----
+# eval "$(starship init zsh)"
