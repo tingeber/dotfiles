@@ -121,7 +121,7 @@ ssh_symbol = ' ' # '' # '⇒' # ' ' # 'ﬁ⇒'
 disabled = false
 
 [localip]
-format = '\([$localipv4](fg:mauve)\)'
+format = '[$localipv4](fg:mauve)'
 ssh_only = true
 disabled = false
 
