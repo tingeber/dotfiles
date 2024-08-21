@@ -38,9 +38,7 @@ $jobs\
 $package\
 $memory_usage\
 [ ](fg:#242424)\
-$username\
-$hostname\
-$localip\
+$username $hostname ($localip)\
 $all\
 $status\
 $line_break\
