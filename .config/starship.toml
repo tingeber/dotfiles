@@ -132,7 +132,7 @@ disabled = false
 format = '(fg:text)[$read_only]($read_only_style)[$repo_root]($repo_root_style)[$path]($style)'
 style = 'fg:text'
 home_symbol = '  ~'
-read_only = ' ' # ' ' # ' ''
+read_only = '󰏯 ' # ' ' # ' ''
 read_only_style = 'fg:text'
 truncation_length = 3
 truncation_symbol = '…/'
@@ -170,17 +170,17 @@ conflicted = '[${count} ](fg:red)'
 ahead = '[⇡${count} ](fg:yellow)'
 behind = '[⇣${count} ](fg:yellow)'
 diverged = '[⇕${ahead_count}⇡${behind_count}⇣ ](fg:yellow)' # ⇕ ↕ ⇳ 󰹹 󰹺 󰧈
-up_to_date = '[✓ ](fg:green)'
-untracked = '[ {count} ](fg:red)' # 'ﳇ$' # '? '
+up_to_date = '[ ](fg:green)'
+untracked = '[ ${count} ](fg:red)' # 'ﳇ$' # '? '
 stashed = '[ ${count} ](fg:#A52A2A)' # '📦 '# ' ' # ' ' # ' ' # ' '
 modified = '[󰷉 ${count} ](fg:yellow)' # '📝' # '! ' #  #  # 
-staged = '[${count} ](fg:green)' # '+ '
+staged = '[${count} ](fg:lavender)' # '+ '
 renamed = '[ ${count} ](fg:yellow)' # ' ' # '﫦' # ᴂ #  #  #  # ﳳ
-deleted = '[﯊${count} ](fg:peach)' # '🗑 ' '- '
+deleted = '[ ${count}] ](fg:red)' # '🗑 ' '- '
 disabled = false
 
 [jobs]
-format = '[  ](fg:blue bold)[$number$symbol]($style)'
+format = '[$number$symbol]($style)'
 style = 'fg:blue'
 symbol = '󰜎' # '廒' # '󰜎' # '' # '✦'
 symbol_threshold = 1
@@ -189,9 +189,10 @@ disabled = false
 
 [package]
 format = '[$symbol$version](peach)'
+disabled = true
 
 [memory_usage]
-format = '[  ](fg:purple bold)[$symbol ${ram} ${swap}]($style)'
+format = '[$symbol ${ram} ${swap}]($style)'
 style = 'fg:purple'
 symbol = '﬙ 北' # '﬙ 痢' # '﬙ / 󰾵' # '󰍛 󰾵' # '﬙ 󰾴' # '﬙ 󰾶' # '﬙ 󰾷' '﬙ 󰣂'
 threshold = 75
@@ -213,7 +214,7 @@ symbol = '🔴 '
 success_symbol = ' '
 format = '$symbol($style) '
 map_symbol = true
-disabled = false
+disabled = true
 
 [localip]
 format = '[$localipv4 ](fg:green bold)'
