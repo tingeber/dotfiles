@@ -1,3 +1,6 @@
+
+
+
 # Homebrew path specification for linux installs:
 if [[ "$(uname)" == "Linux" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -12,8 +15,12 @@ if [[ "$(uname -p)" == "arm" ]]; then
   # zsh pretty things
   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # Connecting to nvm
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
   # p10k source, because it's still the best one around
-  source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
+  # source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 fi
 
 
@@ -86,4 +93,4 @@ eval "$(zoxide init zsh)"
 alias cd="z"
 
 # ---- Starship for a pretty prompt ----
-# eval "$(starship init zsh)"
+eval "$(starship init zsh)"
