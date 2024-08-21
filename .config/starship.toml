@@ -28,10 +28,10 @@ palette = "catppuccin_frappe"
 # Customizing the prompt (and placing desired modules at desired position and sequence):
 format = """
 [╭╴](fg:#505050)\
+$sudo\
 $os\
 $username\
 $hostname\
-$sudo\
 $directory\
 $git_branch$git_commit$git_state$git_metrics$git_status\
 $fill\
@@ -44,7 +44,7 @@ $all\
 $cmd_duration\
 $line_break\
 [╰╴](fg:#505050)\
-$character($style)
+$character
 """
 
 # right_format = """
@@ -108,7 +108,7 @@ Unknown = ""
 Windows = ""
 
 [username]
-format = '[ ](fg:green bold)[$user]($style)[ ]()'
+format = '(fg:green bold)[$user]($style)[ ]()'
 style_user = 'fg:green bold'
 style_root = 'fg:red bold'
 show_always = false
@@ -117,34 +117,34 @@ disabled = false
 [hostname]
 format = '[$ssh_symbol ](fg:green bold)[$hostname](fg:green bold)[ ]()'
 ssh_only = true
-ssh_symbol = '' # '⇒' # ' ' # 'ﬁ⇒'
+ssh_symbol = '' # '' # '⇒' # ' ' # 'ﬁ⇒'
 #trim_at = '.companyname.com'
 disabled = false
 
 [sudo]
-format = '[ ](fg:red bold)[as $symbol]($style)'
-style = 'fg:red bold'
-symbol = ' ' # ' ❯ '
+format = '[$symbol]($style)'
+style = 'fg:red'
+symbol = '  ' # '  ' #' ❯' # ' '
 disabled = false
 
 [directory]
-format = '[ ](fg:cyan bold)[$read_only]($read_only_style)[$repo_root]($repo_root_style)[$path]($style)'
-style = 'fg:cyan bold'
-home_symbol = ' ~'
+format = '(fg:text)[$read_only]($read_only_style)[$repo_root]($repo_root_style)[$path]($style)'
+style = 'fg:text'
+home_symbol = '  ~'
 read_only = ' ' # ' ' # ' ''
-read_only_style = 'fg:cyan'
+read_only_style = 'fg:text'
 truncation_length = 3
 truncation_symbol = '…/'
 truncate_to_repo = true
-repo_root_format = '[ ](fg:cyan bold)[$read_only]($read_only_style)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[ ]()'
-repo_root_style	= 'fg:cyan bold'
+repo_root_format = '[  ](fg:lavender)[$read_only]($read_only_style)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[ ]()'
+repo_root_style	= 'fg: lavender'
 use_os_path_sep = true
 disabled = false
 
 [git_branch]
-format = '[❯ $symbol $branch(:$remote_branch)]($style)[ ]()'
-style = 'fg:#E04D27'
-symbol = ''
+format = '[at $symbol $branch(:$remote_branch)]($style)[ ]()'
+style = 'lavender'
+symbol = ''
 #ignore_branches = ['master', 'main']
 
 [git_commit]
@@ -202,7 +202,6 @@ min_time = 500
 disabled = false
 
 [fill]
-# style = 'fg:#505050'
 symbol = ' '
 
 
@@ -218,6 +217,10 @@ disabled = false
 format = '[$localipv4 ](fg:green bold)'
 ssh_only = true
 disabled = false
+
+[character]
+success_symbol = "[❯](bold lavender)"
+error_symbol = "[❯](bold red)"
 
 # ----------------------
 # Catpuccin color themes

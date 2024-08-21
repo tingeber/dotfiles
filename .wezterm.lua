@@ -16,7 +16,7 @@ config.color_scheme = 'Catppuccin Frappe'
 
 
 
-config.font = wezterm.font("MesloLGS Nerd Font Mono")
+config.font = wezterm.font("MesloLGS Nerd Font")
 -- config.font = wezterm.font("FiraCode Nerd Font")
 config.font_size = 14
 config.line_height = 1.1
