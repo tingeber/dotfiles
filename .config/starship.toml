@@ -116,7 +116,7 @@ disabled = false
 [hostname]
 format = '[@$hostname$ssh_symbol](fg:mauve)'
 ssh_only = true
-ssh_symbol = ' ' # '' # '⇒' # ' ' # 'ﬁ⇒'
+ssh_symbol = '  ' # '' # '⇒' # ' ' # 'ﬁ⇒'
 #trim_at = '.companyname.com'
 disabled = false
 
