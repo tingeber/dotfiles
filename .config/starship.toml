@@ -30,16 +30,16 @@ format = """
 [╭╴](fg:#505050)\
 $sudo\
 $os\
-$username\
-$hostname\
 $directory\
 $git_branch$git_commit$git_state$git_metrics$git_status\
-$cmd_duration\
 $fill\
+$cmd_duration\
 $jobs\
 $package\
 $memory_usage\
 [ ](fg:#242424)\
+$username\
+$hostname\
 $localip\
 $all\
 $status\
@@ -109,14 +109,14 @@ Unknown = ""
 Windows = ""
 
 [username]
-format = '(fg:green bold)[$user]($style)[ ]()'
-style_user = 'fg:green bold'
+format = '(fg:mauve)[$user]($style)[ ]()'
+style_user = 'fg:mauve'
 style_root = 'fg:red bold'
 show_always = false
 disabled = false
 
 [hostname]
-format = '[$ssh_symbol ](fg:green bold)[$hostname](fg:green bold)[ ]()'
+format = '[$ssh_symbol](fg:mauve)[$hostname](fg:mauve)'
 ssh_only = true
 ssh_symbol = '' # '' # '⇒' # ' ' # 'ﬁ⇒'
 #trim_at = '.companyname.com'
@@ -199,7 +199,7 @@ threshold = 75
 disabled = false
 
 [cmd_duration]
-format = '[ $duration]($style)'
+format = '[ $duration]($style)[ ]()'
 style = 'fg:peach'
 min_time = 500
 disabled = false
@@ -217,7 +217,7 @@ map_symbol = true
 disabled = true
 
 [localip]
-format = '[$localipv4 ](fg:green bold)'
+format = '[$localipv4 ](fg:mauve)'
 ssh_only = true
 disabled = false
 
