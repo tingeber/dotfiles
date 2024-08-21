@@ -34,6 +34,7 @@ $username\
 $hostname\
 $directory\
 $git_branch$git_commit$git_state$git_metrics$git_status\
+$cmd_duration\
 $fill\
 $jobs\
 $package\
@@ -41,7 +42,7 @@ $memory_usage\
 [ ](fg:#242424)\
 $localip\
 $all\
-$cmd_duration\
+$status\
 $line_break\
 [╰╴](fg:#505050)\
 $character
@@ -136,8 +137,9 @@ read_only_style = 'fg:text'
 truncation_length = 3
 truncation_symbol = '…/'
 truncate_to_repo = true
-repo_root_format = '[  ](fg:lavender)[$read_only]($read_only_style)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[ ]()'
-repo_root_style	= 'fg: lavender'
+repo_root_format = '[](fg:lavender)[ ](bg:lavender fg:crust)[$read_only]($read_only_style)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[](fg:lavender)[ ]()'
+before_repo_root_style = 'bg:lavender fg:crust'
+repo_root_style	= 'bg:lavender fg:crust'
 use_os_path_sep = true
 disabled = false
 
@@ -155,15 +157,15 @@ tag_symbol = ' ' # ' ''
 disabled = false
 
 [git_metrics]
-format = '[\[+$added/]($added_style)[-$deleted\]]($deleted_style)[ ]()'
-added_style = 'fg:#E04D27'
-deleted_style = 'fg:#E04D27'
+format = '\[[+$added]($added_style)/[-$deleted]($deleted_style)\] '
+added_style = 'fg:green'
+deleted_style = 'fg:red'
 disabled = false
 
 [git_status]
 # place symbols before '$count'
 format = '([$all_status$ahead_behind]($style))'
-style = 'fg:#E04D27'
+style = 'fg:lavender'
 conflicted = '[${count} ](fg:red)'
 ahead = '[⇡${count} ](fg:yellow)'
 behind = '[⇣${count} ](fg:yellow)'
@@ -171,10 +173,10 @@ diverged = '[⇕${ahead_count}⇡${behind_count}⇣ ](fg:yellow)' # ⇕ ↕ ⇳ 
 up_to_date = '[✓ ](fg:green)'
 untracked = '[ {count} ](fg:red)' # 'ﳇ$' # '? '
 stashed = '[ ${count} ](fg:#A52A2A)' # '📦 '# ' ' # ' ' # ' ' # ' '
-modified = '[󰷉${count} ](fg:#C8AC00)' # '📝' # '! ' #  #  # 
+modified = '[󰷉 ${count} ](fg:yellow)' # '📝' # '! ' #  #  # 
 staged = '[${count} ](fg:green)' # '+ '
-renamed = '[${count} ](fg:yellow)' # ' ' # '﫦' # ᴂ #  #  #  # ﳳ
-deleted = '[﯊${count} ](fg:orange)' # '🗑 ' '- '
+renamed = '[ ${count} ](fg:yellow)' # ' ' # '﫦' # ᴂ #  #  #  # ﳳ
+deleted = '[﯊${count} ](fg:peach)' # '🗑 ' '- '
 disabled = false
 
 [jobs]
@@ -196,8 +198,8 @@ threshold = 75
 disabled = false
 
 [cmd_duration]
-format = ' $duration($style)'
-style = 'peach'
+format = '[ $duration]($style)'
+style = 'fg:peach'
 min_time = 500
 disabled = false
 
