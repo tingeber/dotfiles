@@ -38,7 +38,7 @@ $jobs\
 $package\
 $memory_usage\
 [ ](fg:#242424)\
-$username $hostname ($localip)\
+$username$hostname$localip\
 $all\
 $status\
 $line_break\
@@ -107,17 +107,22 @@ Unknown = ""
 Windows = ""
 
 [username]
-format = '(fg:mauve)[$user]($style)[ ]()'
+format = '(fg:mauve)[$user]($style)'
 style_user = 'fg:mauve'
 style_root = 'fg:red bold'
 show_always = false
 disabled = false
 
 [hostname]
-format = '[$ssh_symbol](fg:mauve)[$hostname](fg:mauve)'
+format = '[@$hostname$ssh_symbol](fg:mauve)'
 ssh_only = true
-ssh_symbol = '' # '' # '⇒' # ' ' # 'ﬁ⇒'
+ssh_symbol = ' ' # '' # '⇒' # ' ' # 'ﬁ⇒'
 #trim_at = '.companyname.com'
+disabled = false
+
+[localip]
+format = '\([$localipv4](fg:mauve)\)'
+ssh_only = true
 disabled = false
 
 [sudo]
@@ -214,10 +219,6 @@ format = '$symbol($style) '
 map_symbol = true
 disabled = true
 
-[localip]
-format = '[$localipv4 ](fg:mauve)'
-ssh_only = true
-disabled = false
 
 [character]
 success_symbol = "[❯](bold lavender)"
