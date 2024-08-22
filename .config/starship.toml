@@ -136,19 +136,19 @@ format = '(fg:text)[$read_only]($read_only_style)[$repo_root]($repo_root_style)[
 style = 'fg:text'
 home_symbol = '  ~'
 read_only = '󰏯 ' # ' ' # ' ''
-read_only_style = 'fg:text'
+read_only_style = 'fg:crust'
 truncation_length = 3
 truncation_symbol = '…/'
 truncate_to_repo = true
-repo_root_format = '[](fg:lavender)[ ](bg:lavender fg:crust)[$read_only]($read_only_style)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[](fg:lavender)[ ]()'
-before_repo_root_style = 'bg:lavender fg:crust'
-repo_root_style	= 'bg:lavender fg:crust'
+repo_root_format = '[](fg:maroon)[ ](bg:maroon fg:crust)[$read_only]($read_only_style)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[](fg:maroon)[ ]()'
+before_repo_root_style = 'bg:maroon fg:crust'
+repo_root_style	= 'bg:maroon fg:crust'
 use_os_path_sep = true
 disabled = false
 
 [git_branch]
 format = '[at $symbol $branch(:$remote_branch)]($style)[ ]()'
-style = 'lavender'
+style = 'fg:maroon'
 symbol = ''
 #ignore_branches = ['master', 'main']
 
