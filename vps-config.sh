@@ -8,7 +8,6 @@ brewapps="zsh micro stow zsh-autosuggestions zsh-syntax-highlighting eza zoxide 
 
 brewfolder="/home/linuxbrew/.linuxbrew"
 
-git clone https://github.com/Homebrew/brew
 
 echo "
 ******************************************************************
