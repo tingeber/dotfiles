@@ -44,7 +44,6 @@ echo "No Homebrew found, installing..."
 # Adding CI=1 in front of the script should recognize passwordless sudo
 # thanks to https://github.com/Homebrew/install/issues/612
 
-sudo -u ${user} \
 CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
 && echo "Homebrew installed. Adding it to .bashrc..."
 
@@ -60,9 +59,8 @@ echo "Installing our programs..."
 brew install ${brewapps}
 
 # echo "Setting zsh as default shell..."
-
-echo $(which zsh) | tee -a /etc/shells
-chsh -s $(which zsh) $USER
+echo $(which zsh) | sudo tee -a /etc/shells
+sudo chsh -s $(which zsh) ${user}
 
 echo "symlinking dotfiles with stow..."
 
