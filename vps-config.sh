@@ -4,7 +4,7 @@
 
 version="0.0.1"
 
-brewapps="zsh stow zsh-autosuggestions zsh-syntax-highlighting eza zoxide tldr starship"
+brewapps="zsh micro stow zsh-autosuggestions zsh-syntax-highlighting eza zoxide tldr starship"
 
 echo "
 ******************************************************************
