@@ -179,7 +179,7 @@ stashed = '[ ${count} ](fg:#A52A2A)' # '📦 '# ' ' # ' ' # ' ' # '�
 modified = '[󰷉 ${count} ](fg:yellow)' # '📝' # '! ' #  #  # 
 staged = '[${count} ](fg:lavender)' # '+ '
 renamed = '[ ${count} ](fg:yellow)' # ' ' # '﫦' # ᴂ #  #  #  # ﳳ
-deleted = '[ ${count}] ](fg:red)' # '🗑 ' '- '
+deleted = '[ ${count} ](fg:red)' # '🗑 ' '- '
 disabled = false
 
 [jobs]
