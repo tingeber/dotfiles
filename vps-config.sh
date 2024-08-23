@@ -9,10 +9,13 @@ brewapps="zsh micro stow zsh-autosuggestions zsh-syntax-highlighting eza zoxide 
 echo "
 ******************************************************************
 Welcome to the Environment install script, version ${version}.
-This script is for vanilla VPS installs, running bash,
+This script is for vanilla VPS installs on Debian/Ubuntu, running bash,
 without zsh or homebrew.
 ******************************************************************
 "
+
+echo "installing pre-requisite apps..."
+apt-get install -y build-essential procps curl file git
 
 echo "Checking if Homebrew is installed..."
 
@@ -24,7 +27,7 @@ fi
 
 echo "No Homebrew found, installing..."
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 echo "Homebrew installed. Adding it to .bashrc..."
 
