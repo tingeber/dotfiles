@@ -1,19 +1,35 @@
 # dotfiles and dev environment
 
-This readme assumes you're running Homebrew. The `.zshrc` file does some basic distro logic to set up correct paths based on whether you're running Linux or MacOS.
+## Vanilla VPS installs
 
-## First things first
+This script is set up and tested on Hetzner Cloud, on a VPS running Ubuntu, with a non-root user with passwordless sudo privileges. If you're runnning `cloud-init` you can adapt my `cloud-config.yaml` to set the VPS up.
+
+### Pre-requisites
+
+- Git
+
+### Steps
+
+- If you're not me, change the `user` variable to your username on the VPS
+- `git pull` this repo into your home directory `~`
+- `bash vps-config.sh` (no `sudo`!)
+- Drink some water while you wait, I'm sure you're dehydrated
+- when the script ends, run `exec zsh` to switch over to the shell that's been set up for you.
+
+# Mac installs
 
 Make sure you're using `zsh` as your main shell. Here's a gist for you: https://gist.github.com/derhuerst/12a1558a4b408b3b2b6e. If it's out of date, ask the internet.
 
 Make sure you have installed [homebrew](brew.sh), then install git and stow (follow this [youtube tutorial](https://www.youtube.com/watch?v=y6XCebnB9gs))
 
-
 ### Install git and stow
+
 ```sh
 brew install git stow
 ```
-### Install other useful stuff
+
+### Install other useful programs
+
 ```sh
 brew install zsh-autosuggestions zsh-syntax-highlighting eza zoxide gh
 ```
@@ -27,7 +43,6 @@ cd dotfiles
 stow .
 ```
 
-
 # Terminal tools
 
 Thanks Josean for the tutorial: https://www.josean.com/posts/how-to-setup-alacritty-terminal
@@ -35,7 +50,6 @@ Thanks Josean for the tutorial: https://www.josean.com/posts/how-to-setup-alacri
 ## QoL tools
 
 `.zshrc` in this dotfiles repo is already set up for `zsh-autosuggestions zsh-syntax-highlighting eza zoxide`
-
 
 ## Fonts
 
@@ -54,15 +68,17 @@ brew tap homebrew/linux-fonts
 brew install font-meslo-lg-nerd-font
 ```
 
-## PowerLevel10k
+## Terminal setup
 
-I stopped using ohmyzsh, easier to run the small list of apps directly, esp with this readme.
+I'm currently using WezTerm, and there is a config file for it in the dotfiles. `stow` will put it where it needs to go.
+
+## Starship
 
 ```sh
-brew install powerlevel10k
+brew install starship
 ```
 
-you can run the wizard again with `p10k configure`
+There is already a configuration `.toml` that I've been working on for a bit. Feel free to use it, Not Me.
 
 ## check if arrow keys are working
 
