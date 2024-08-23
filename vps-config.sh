@@ -28,44 +28,33 @@ echo "Checking if Homebrew is installed..."
 if [[ -d $(brew --prefix) ]]; then
   brewfolder=$(brew --prefix)
   echo "Homebrew is installed, we found the install directory at ${brewfolder}. Skipping installation."
-  exit 1
+else
+  echo "No Homebrew found, installing..."
+  # since we're running this entire script with sudo, we downgrade to regular user for the homebrew install
+  # Homebrew does not allow to be installed as root
+  # Adding CI=1 in front of the script should recognize passwordless sudo
+  # thanks to https://github.com/Homebrew/install/issues/612
+
+  CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+  && echo "Homebrew installed. Adding it to .bashrc..."
+
+  test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+  test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
+
+  # reload bash to recognize homebrew
+  source ~/.bashrc
+
+  echo "Installing our programs..."
+
+  brew install ${brewapps}
 fi
 
-echo "No Homebrew found, installing..."
-
-# echo "Creating Homebrew directory..."
-# sudo mkdir -p ${brewfolder}
-# echo "Cloning Homebrew into Homebrew directory..."
-# sudo curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip-components 1 -C ${brewfolder}
-
-
-# since we're running this entire script with sudo, we downgrade to regular user for the homebrew install
-# Homebrew does not allow to be installed as root
-# Adding CI=1 in front of the script should recognize passwordless sudo
-# thanks to https://github.com/Homebrew/install/issues/612
-
-CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
-&& echo "Homebrew installed. Adding it to .bashrc..."
-
-test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
-
-# reload bash to recognize homebrew
-source ~/.bashrc
-
-echo "Installing our programs..."
-
-brew install ${brewapps}
-
-# echo "Setting zsh as default shell..."
-echo $(which zsh) | sudo tee -a /etc/shells
-sudo chsh -s $(which zsh) ${user}
-
 echo "symlinking dotfiles with stow..."
+stow . && echo "Done."
 
-stow .
+echo "Setting zsh as default shell..."
+echo $(which zsh) | sudo tee -a /etc/shells
+sudo usermod --shell $(which zsh) ${user} && echo "Done."
 
-echo "Done! Switching to zsh..."
-
-exec $SHELL
+echo "The script is done! Remember to run 'exec zsh' to change into the custom shell."
