@@ -18,7 +18,7 @@ without zsh or homebrew.
 "
 
 echo "installing pre-requisite apps..."
-apt-get install -y build-essential procps curl file git
+sudo apt-get install -y build-essential procps curl file git
 
 echo "Checking if Homebrew is installed..."
 
@@ -31,10 +31,11 @@ fi
 echo "No Homebrew found, installing..."
 
 echo "Creating Homebrew directory..."
-mkdir -p ${brewfolder}
+sudo mkdir -p ${brewfolder}
 
 echo "Cloning Homebrew into Homebrew directory..."
-git clone https://github.com/Homebrew/brew ${brewfolder}
+sudo curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip-components 1 -C ${brewfolder}
+
 
 echo "Homebrew installed. Adding it to .bashrc..."
 
@@ -53,10 +54,10 @@ echo "Installing our programs..."
 
 brew install ${brewapps}
 
-echo "Setting zsh as default shell..."
+# echo "Setting zsh as default shell..."
 
-echo $(which zsh) | tee -a /etc/shells
-chsh -s $(which zsh) $USER
+echo $(which zsh) | sudo tee -a /etc/shells
+sudo chsh -s $(which zsh) $USER
 
 echo "symlinking dotfiles with stow..."
 
