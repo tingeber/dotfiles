@@ -69,6 +69,7 @@ echomain "Checking if Homebrew is installed..."
 if [[ -d $(brew --prefix) ]]; then
   brewfolder=$(brew --prefix)
   echofail "Homebrew is installed, we found the install directory at ${brewfolder}. Skipping installation."
+  exit 1
 else
   echoyay "No Homebrew found, installing..."
   # since we're running this entire script with sudo, we downgrade to regular user for the homebrew install

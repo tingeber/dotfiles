@@ -4,23 +4,24 @@ RCS
 .+,v
 
 CVS
-\.\#.+       # CVS conflict files / emacs lock files
+\.\#.+ # CVS conflict files / emacs lock files
 \.cvsignore
 
 \.svn
-_darcs
+\_darcs
 \.hg
 
 \.git
 \.gitignore
 \.gitmodules
 
-# config file
+# config files
 ^/vps-config.sh
+^/cloud-config.yaml
 
-.+~          # emacs backup files
-\#.*\#       # emacs autosave files
+.+~ # emacs backup files
+\#.\*\# # emacs autosave files
 
-^/README.*
-^/LICENSE.*
+^/README._
+^/LICENSE._
 ^/COPYING
