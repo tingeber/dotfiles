@@ -1,8 +1,81 @@
-# dotfiles and dev environment
+# dotfiles for a pretty and sane dev environment
 
-## Vanilla VPS installs
+Do you spend time in the terminal? Are you, like me, obsessively tweaking the terminal so it doesn’t look and feel like you’re talking to a 1984 typewriter? Are you looking for a sane set of simple, pretty quality of life programs and a pleasing, calm UI that gets out of your way? Do you work with remote servers, and want them to behave exactly the same as your main comp?
 
-This script is set up and tested on Hetzner Cloud, on a VPS running Ubuntu, with a non-root user with passwordless sudo privileges. If you're runnning `cloud-init` you can adapt my `cloud-config.yaml` to set the VPS up.
+This repo is for you (and me). It's a set of config (dot) files that define and customize my terminal environment.
+
+## My dotfile manifesto
+
+- If it can be installed with `brew`, it will be installed with `brew`
+- As identical as possible across operating systems
+- When customizing, I prefer tools I fully control through a config file
+- as simple as possible
+- fewest moving pieces
+- as automated as possible
+
+## My tools
+
+| Tool                | MacOS            | Linux                |
+| ------------------- | ---------------- | -------------------- |
+| **Shell**           | zsh              | zsh                  |
+| **Terminal**        | WezTerm          | n.a. (remote access) |
+| **Nerd Font**       | Meslo LG         | Meslo LG             |
+| **Package Manager** | Homebrew         | Homebrew             |
+| **Theme**           | Catpuccin Frappé | Catpuccin Frappé     |
+| **Prompt UI**       | Starship         | Starship             |
+
+### Zsh
+
+My main computer is a Mac so I got used to Zsh since Mac OS set it as default. It's also where I started discovering the joys of customization thanks to `oh-my-zsh`. I don't use it anymore; it's great but I prefer writing my own custom configs, and I don't need all the bells and whistles it has.
+
+These are the quality of life tools I use to improve my terminal experience:
+
+- [eza](https://eza.rocks): a modern replacement for `ls` with more features and better defaults
+- [zoxide](https://github.com/ajeetdsouza/zoxide): a smarter `cd` that remembers your most visited folders, and makes traversing directories more fun
+- [tldr](https://tldr.sh): awesome short condensed replacement for `--help` and `man` pages. For when you just need a quick reminder how `curl` works
+- [micro](https://micro-editor.github.io): a file editor for the Terminal that acts like a desktop app so i don't have to memorize new shortcuts. I mean, one day I will fully commit to Neovim, but that day isn't today
+- [Starship](https://starship.rs): cross-platform customizable prompt. I used to use `p10k` as a plugin for `oh-my-zsh`, then I removed `oh-my-zsh` and ran vanilla `p10k`, then I discovered Starship and, after a couple of rocky starts, I fully committed. Again, mainly because it's fully customizable through a text config file.
+- [stow](https://www.gnu.org/software/stow/manual/stow.html): a symlink manager. This tiny utility makes this whole dotfiles thing work.
+
+### Let's talk about `stow`
+
+So stow really makes all of this work. it’s super simple, as long as your `dotfiles` folder is in your home holder, you just run `stow .` from the dotfiles folder once and it symlinks everything for you.
+
+```bash
+cd ~/dotfiles
+stow .
+```
+
+If at some point you change, remove, or add stuff to dotfiles, just run `stow —restow .` and it will update all symlinks for you.
+
+```bash
+cd ~/dotfiles
+stow --restow .
+```
+
+The default for stow is super simple - it looks at any file it finds in the directory, and creates symlinks 'one step up'. That's it, and that's 99% of the job done. There are also ways to ignore files by using a `.stow-local-ignore` file, though stow already knows not to symlink things like a `README` or a `.gitignore`.
+
+This way you have your `dotfiles` folder that is clean and simple and manageable, without having to deal with the chaos of the home folder.
+
+### WezTerm
+
+I switched to WezTerm from iTerm2 because it is much, much simpler and it's super customizable with a simple text config file.
+
+### Nerd Font
+
+There's something _just right_ about Meslo Nerd. I think it's the ligatures.
+
+### Homebrew
+
+Honestly, if I could run my washing machine with Homebrew, I would. Super well defined and documented, and the Mac OS - Linux feature parity means I get to use the same commands across platforms.
+
+### Catpuccin Frappé
+
+I love the pastels and the super sensible palette. I especially love that Catpuccin has theme presets for pretty much any themeable software in existence, so I can have the same styles from WezTerm to Starship.
+
+## Remote VPS installs
+
+> I run this script whenever I create a new machine. It is set up and tested on Hetzner Cloud, on a VPS running Ubuntu, with a non-root user with passwordless sudo privileges. If you're runnning `cloud-init` you can adapt my `cloud-config.yaml` to set the VPS up.
 
 ### Pre-requisites
 
@@ -18,20 +91,21 @@ This script is set up and tested on Hetzner Cloud, on a VPS running Ubuntu, with
 
 # Mac installs
 
-Make sure you're using `zsh` as your main shell. Here's a gist for you: https://gist.github.com/derhuerst/12a1558a4b408b3b2b6e. If it's out of date, ask the internet.
+Hello, friend
 
-Make sure you have installed [homebrew](brew.sh), then install git and stow (follow this [youtube tutorial](https://www.youtube.com/watch?v=y6XCebnB9gs))
+## Pre-requisites
 
-### Install git and stow
+- Make sure you're using `zsh` as your main shell. You probably are: MacOS ships with `zsh` enabled by default. Here's a gist for you: https://gist.github.com/derhuerst/12a1558a4b408b3b2b6e.
+- Make sure you have installed [homebrew](brew.sh):
 
 ```sh
-brew install git stow
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### Install other useful programs
+Install all apps:
 
 ```sh
-brew install zsh-autosuggestions zsh-syntax-highlighting eza zoxide gh
+brew install wezterm git stow zsh-autosuggestions zsh-syntax-highlighting eza zoxide gh starship
 ```
 
 Clone this repo inside your home folder and run stow from it:
@@ -43,17 +117,7 @@ cd dotfiles
 stow .
 ```
 
-# Terminal tools
-
-Thanks Josean for the tutorial: https://www.josean.com/posts/how-to-setup-alacritty-terminal
-
-## QoL tools
-
-`.zshrc` in this dotfiles repo is already set up for `zsh-autosuggestions zsh-syntax-highlighting eza zoxide`
-
-## Fonts
-
-Let's get our fonts figured out first. We're using Meslo [Nerd Font](https://www.nerdfonts.com/).
+Install your Nerd Font. I'm using Meslo LGS [Nerd Font](https://www.nerdfonts.com/) but you can pick any other nerd font you like. Make sure you're _not_ using the "Mono" version of your font because the symbols and icons won't resize properly. Once you pick your font, make sure to update WezTerm's config file.
 
 On Mac:
 
@@ -68,28 +132,9 @@ brew tap homebrew/linux-fonts
 brew install font-meslo-lg-nerd-font
 ```
 
-## Terminal setup
+Open WezTerm and it should automatically pick up its config file, and the terminal UI should automatically load all our configs from the `.zshrc` file.
 
-I'm currently using WezTerm, and there is a config file for it in the dotfiles. `stow` will put it where it needs to go.
+# Special thanks
 
-## Starship
-
-```sh
-brew install starship
-```
-
-There is already a configuration `.toml` that I've been working on for a bit. Feel free to use it, Not Me.
-
-## check if arrow keys are working
-
-If on a Mac, the bind keys shoud be correct. If on another distro, run `cat -v`, press up and down arrow keys, copy the output and update these lines in `.zshrc`:
-
-```sh
-# completion using arrow keys (based on history)
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
-```
-
-## [TODO]
-
-- set up `tmux`
+- Thanks Josean for the tutorial: https://www.josean.com/posts/how-to-setup-alacritty-terminal
+- CJ for the awesome "Mac from Scratch" video (link)
