@@ -134,7 +134,9 @@ brew install font-meslo-lg-nerd-font
 
 Open WezTerm and it should automatically pick up its config file, and the terminal UI should automatically load all our configs from the `.zshrc` file.
 
+Hey that's it, go touch grass.
+
 # Special thanks
 
-- Thanks Josean for the tutorial: https://www.josean.com/posts/how-to-setup-alacritty-terminal
-- CJ for the awesome "Mac from Scratch" video (link)
+- Thanks Josean for this tutorial: https://www.josean.com/posts/how-to-setup-alacritty-terminal
+- Thanks CJ for the awesome "Mac from Scratch" video (https://www.youtube.com/watch?v=GK7zLYAXdDs)
