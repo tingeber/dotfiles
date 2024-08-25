@@ -1,27 +1,10 @@
 # Comments and blank lines are allowed.
 
-RCS
-.+,v
-
-CVS
-\.\#.+ # CVS conflict files / emacs lock files
-\.cvsignore
-
-\.svn
-\_darcs
-\.hg
-
 \.git
 \.gitignore
 \.gitmodules
+\.env
+vps-config.sh
+cloud-config.yaml
 
-# config files
-^/vps-config.sh
-^/cloud-config.yaml
-
-.+~ # emacs backup files
-\#.\*\# # emacs autosave files
-
-^/README._
-^/LICENSE._
-^/COPYING
+README.md
