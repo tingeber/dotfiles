@@ -81,19 +81,38 @@ I love the pastels and the super sensible palette. I especially love that Catpuc
 
 ## Remote VPS installs
 
-> I run this script whenever I create a new machine. It is set up and tested on Hetzner Cloud, on a VPS running Ubuntu, with a non-root user with passwordless sudo privileges. If you're runnning `cloud-init` you can adapt my `cloud-config.yaml` to set the VPS up.
+> I run this script whenever I create a new machine. It is set up and tested on [Greenhost](https://greenhost.net) and [Hetzner Cloud](https://www.hetzner.com/cloud/), on a VPS running Ubuntu, with a non-root user with passwordless sudo privileges. It should work with any cloud provider that lets you run a `cloud-init` script as part of the VPS setup. You can adapt my `cloud-config.yaml` to set up your VPS.
 
-### Pre-requisites
+### VPS Creation steps
 
-- Git
+- when setting up the VPS, paste the `cloud-config.yaml` content in the `cloud-init` area of the set up page
+- the script will create your user, assign it your SSH key, set it to passwordless sudo, and remove root access
+- it also installs `git` (in case it's not part of the vanilla install) and some quality of life stuff (like fail2ban)
+- when setup is over, `ssh {USERNAME}@{SERVER_IP}`.
 
 ### Steps
 
 - If you're not me, change the `user` variable to your username on the VPS
-- `git pull` this repo into your home directory `~`
-- `bash vps-config.sh` (no `sudo`!)
+- `git clone` this repo into your home directory `~`
+
+```bash
+cd ~
+git clone https://github.com/tingeber/dotfiles.git
+```
+
+- run the install script as regular user (not sudo!):
+
+```bash
+cd dotfiles
+bash vps-config.sh
+```
+
 - Drink some water while you wait, I'm sure you're dehydrated
 - when the script ends, run `exec zsh` to switch over to the shell that's been set up for you.
+
+```bash
+exec zsh
+```
 
 # Mac installs
 
@@ -110,13 +129,13 @@ If you're running on Mac, you should be able to follow these steps and have your
 
 Install all apps:
 
-```sh
+```bash
 brew install wezterm git stow zsh-autosuggestions zsh-syntax-highlighting eza zoxide gh starship
 ```
 
 Clone this repo inside your home folder and run stow from it:
 
-```sh
+```bash
 cd ~/
 git clone git@github.com:tingeber/dotfiles.git
 cd dotfiles
@@ -127,13 +146,13 @@ Install your Nerd Font. I'm using Meslo LGS [Nerd Font](https://www.nerdfonts.co
 
 On Mac:
 
-```sh
+```bash
 brew install --cask font-meslo-lg-nerd-font
 ```
 
 On linux:
 
-```sh
+```bash
 brew tap homebrew/linux-fonts
 brew install font-meslo-lg-nerd-font
 ```
@@ -144,5 +163,5 @@ Hey that's it, go touch grass.
 
 # Special thanks
 
-- Thanks Josean for this tutorial: https://www.josean.com/posts/how-to-setup-alacritty-terminal
+- Thanks Josean for his tutorial: https://www.josean.com/posts/how-to-setup-wezterm-terminal
 - Thanks CJ for the awesome "Mac from Scratch" video (https://www.youtube.com/watch?v=GK7zLYAXdDs)

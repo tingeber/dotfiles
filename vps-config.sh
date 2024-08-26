@@ -83,14 +83,14 @@ else
   test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
   test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
-
-  # reload bash to recognize homebrew
-  source ~/.bashrc
-
-  echomain "Installing our programs..."
-
-  brew install ${brewapps}
 fi
+
+# reload bash to recognize homebrew
+source ~/.bashrc
+
+echomain "Installing our programs..."
+
+brew install ${brewapps} && echoyay "Done."
 
 echomain "symlinking dotfiles with stow..."
 stow . && echo "Done."

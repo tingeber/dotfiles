@@ -9,6 +9,7 @@ users:
 packages:
   - fail2ban
   - ufw
+  - git
 package_update: true
 package_upgrade: true
 runcmd:
