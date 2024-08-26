@@ -1,8 +1,14 @@
 # dotfiles for a pretty and sane dev environment
 
+**Last updated: August 2024**
+
 Do you spend time in the terminal? Are you, like me, obsessively tweaking the terminal so it doesn’t look and feel like you’re talking to a 1984 typewriter? Are you looking for a sane set of simple, pretty quality of life programs and a pleasing, calm UI that gets out of your way? Do you work with remote servers, and want them to behave exactly the same as your main comp?
 
 This repo is for you (and me). It's a set of config (dot) files that define and customize my terminal environment.
+
+Feel free to use this repo! Probably best to fork it or download and make your own. You can also clone it and use as is, which means your terminal environment will get updated to my own aesthetic every time I do. If that's your vibe, go for it.
+
+Also feel free to open issues or propose PRs.
 
 ## My dotfile manifesto
 
@@ -35,7 +41,7 @@ These are the quality of life tools I use to improve my terminal experience:
 - [tldr](https://tldr.sh): awesome short condensed replacement for `--help` and `man` pages. For when you just need a quick reminder how `curl` works
 - [micro](https://micro-editor.github.io): a file editor for the Terminal that acts like a desktop app so i don't have to memorize new shortcuts. I mean, one day I will fully commit to Neovim, but that day isn't today
 - [Starship](https://starship.rs): cross-platform customizable prompt. I used to use `p10k` as a plugin for `oh-my-zsh`, then I removed `oh-my-zsh` and ran vanilla `p10k`, then I discovered Starship and, after a couple of rocky starts, I fully committed. Again, mainly because it's fully customizable through a text config file.
-- [stow](https://www.gnu.org/software/stow/manual/stow.html): a symlink manager. This tiny utility makes this whole dotfiles thing work.
+- [stow](https://www.gnu.org/software/stow/manual/stow.html): a symlink manager aka the reason this dotfiles repo is possible in the first place.
 
 ### Let's talk about `stow`
 
@@ -91,7 +97,7 @@ I love the pastels and the super sensible palette. I especially love that Catpuc
 
 # Mac installs
 
-Hello, friend
+If you're running on Mac, you should be able to follow these steps and have your own dotfiles setup with a custom terminal environment. I do recommend that you fork this repo, or download it and use it as a starter for your own dotfiles project.
 
 ## Pre-requisites
 
