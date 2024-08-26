@@ -81,7 +81,7 @@ I love the pastels and the super sensible palette. I especially love that Catpuc
 
 ## Remote VPS installs
 
-> I run this script whenever I create a new machine. It is set up and tested on [Greenhost](https://greenhost.net) and [Hetzner Cloud](https://www.hetzner.com/cloud/), on a VPS running Ubuntu, with a non-root user with passwordless sudo privileges. It should work with any cloud provider that lets you run a `cloud-init` script as part of the VPS setup. You can adapt my `cloud-config.yaml` to set up your VPS.
+> I run this script whenever I create a new machine. It is set up and tested on [Greenhost](https://greenhost.net) and [Hetzner Cloud](https://www.hetzner.com/cloud/), on a VPS with at least 1GB RAM, running Ubuntu, with a non-root user with passwordless sudo privileges. It should work with any cloud provider that lets you run a `cloud-init` script as part of the VPS setup. You can adapt my `cloud-config.yaml` to set up your VPS.
 
 ### VPS Creation steps
 
