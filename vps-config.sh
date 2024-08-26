@@ -69,7 +69,6 @@ echomain "Checking if Homebrew is installed..."
 if [[ -d $(brew --prefix) ]]; then
   brewfolder=$(brew --prefix)
   echofail "Homebrew is installed, we found the install directory at ${brewfolder}. Skipping installation."
-  exit 1
 else
   echoyay "No Homebrew found, installing..."
   # since we're running this entire script with sudo, we downgrade to regular user for the homebrew install
@@ -96,7 +95,16 @@ echomain "symlinking dotfiles with stow..."
 stow . && echo "Done."
 
 echomain "Setting zsh as default shell..."
-echo $(which zsh) | sudo tee -a /etc/shells
+
+if grep -Fxq $(which zsh) /etc/shells
+then
+  echomain "our zsh is already in /etc/shells"
+else
+  echo $(which zsh) | sudo tee -a /etc/shells
+fi
+
+echomain "Switching to zsh..."
 sudo usermod --shell $(which zsh) ${user} && echoyay "Done."
+
 
 echomain "The script is done! Remember to run 'exec zsh' to change into the custom shell."
