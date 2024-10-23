@@ -16,10 +16,11 @@ config.color_scheme = 'Catppuccin Frappe'
 
 
 
-config.font = wezterm.font("MesloLGS Nerd Font")
+-- config.font = wezterm.font("MesloLGS Nerd Font")
 -- config.font = wezterm.font("FiraCode Nerd Font")
+config.font = wezterm.font("CaskaydiaCove Nerd Font")
 config.font_size = 14
-config.line_height = 1.1
+config.line_height = 1.2
 
 
 config.default_cursor_style = 'SteadyUnderline'

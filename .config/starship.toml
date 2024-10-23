@@ -27,7 +27,7 @@ palette = "catppuccin_frappe"
 
 # Customizing the prompt (and placing desired modules at desired position and sequence):
 format = """
-[╭╴](fg:#505050)\
+[╭╴](fg:rosewater)\
 $sudo\
 $os\
 $directory\
@@ -42,7 +42,7 @@ $username$hostname$localip\
 $all\
 $status\
 $line_break\
-[╰╴](fg:#505050)\
+[╰╴](fg:rosewater)\
 $character
 """
 
@@ -136,19 +136,19 @@ format = '(fg:text)[$read_only]($read_only_style)[$repo_root]($repo_root_style)[
 style = 'fg:text'
 home_symbol = '  ~'
 read_only = '󰏯 ' # ' ' # ' ''
-read_only_style = 'fg:crust'
+read_only_style = 'fg:peach'
 truncation_length = 3
 truncation_symbol = '…/'
 truncate_to_repo = true
-repo_root_format = '[](fg:maroon)[ ](bg:maroon fg:crust)[$read_only]($read_only_style)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[](fg:maroon)[ ]()'
-before_repo_root_style = 'bg:maroon fg:crust'
-repo_root_style	= 'bg:maroon fg:crust'
+repo_root_format = '[](fg:lavender)[ ](bg:lavender fg:crust)[$read_only]($read_only_style)[$before_root_path$repo_root$path]($repo_root_style)[](fg:lavender)[ ]()'
+before_repo_root_style = 'bg:lavender fg:crust'
+repo_root_style	= 'bg:lavender fg:crust'
 use_os_path_sep = true
 disabled = false
 
 [git_branch]
 format = '[at $symbol $branch(:$remote_branch)]($style)[ ]()'
-style = 'fg:maroon'
+style = 'fg:lavender'
 symbol = ''
 #ignore_branches = ['master', 'main']
 
@@ -161,8 +161,8 @@ disabled = false
 
 [git_metrics]
 format = '\[[+$added]($added_style)/[-$deleted]($deleted_style)\] '
-added_style = 'fg:green'
-deleted_style = 'fg:red'
+added_style = 'fg:teal'
+deleted_style = 'fg:maroon'
 disabled = false
 
 [git_status]
@@ -197,7 +197,7 @@ disabled = true
 [memory_usage]
 format = '[$symbol ${ram} ${swap}]($style)'
 style = 'fg:purple'
-symbol = '﬙ 北' # '﬙ 痢' # '﬙ / 󰾵' # '󰍛 󰾵' # '﬙ 󰾴' # '﬙ 󰾶' # '﬙ 󰾷' '﬙ 󰣂'
+symbol = '󰍛 󰾵' # '﬙ 北' # '﬙ 痢' # '﬙ / 󰾵' # '󰍛 󰾵' # '﬙ 󰾴' # '﬙ 󰾶' # '﬙ 󰾷' '﬙ 󰣂'
 threshold = 75
 disabled = false
 
@@ -222,7 +222,7 @@ disabled = true
 
 [character]
 success_symbol = "[❯](bold lavender)"
-error_symbol = "[❯](bold red)"
+error_symbol = "[❯](bold peach)"
 
 # ----------------------
 # Catpuccin color themes

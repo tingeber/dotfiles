@@ -1,6 +1,6 @@
 # dotfiles for a pretty and sane dev environment
 
-**Last updated: August 2024**
+**Last updated: October 2024**
 
 Do you spend time in the terminal? Are you, like me, obsessively tweaking the terminal so it doesn’t look and feel like you’re talking to a 1984 typewriter? Are you looking for a sane set of simple, pretty quality of life programs and a pleasing, calm UI that gets out of your way? Do you work with remote servers, and want them to behave exactly the same as your main comp?
 
