@@ -25,7 +25,7 @@ Also feel free to open issues or propose PRs.
 | ------------------- | ---------------- | -------------------- |
 | **Shell**           | zsh              | zsh                  |
 | **Terminal**        | WezTerm          | n.a. (remote access) |
-| **Nerd Font**       | Meslo LG         | Meslo LG             |
+| **Nerd Font**       | Caskaydia Cove   | Caskaydia Cove       |
 | **Package Manager** | Homebrew         | Homebrew             |
 | **Theme**           | Catpuccin Frappé | Catpuccin Frappé     |
 | **Prompt UI**       | Starship         | Starship             |
@@ -69,7 +69,7 @@ I switched to WezTerm from iTerm2 because it is much, much simpler and it's supe
 
 ### Nerd Font
 
-There's something _just right_ about Meslo Nerd. I think it's the ligatures.
+Currently obsessed with Caskaydia Cove, the nerd-fontified version of Microsoft's [Cascadia Code](https://github.com/microsoft/cascadia-code).
 
 ### Homebrew
 
@@ -142,19 +142,19 @@ cd dotfiles
 stow .
 ```
 
-Install your Nerd Font. I'm using Meslo LGS [Nerd Font](https://www.nerdfonts.com/) but you can pick any other nerd font you like. Make sure you're _not_ using the "Mono" version of your font because the symbols and icons won't resize properly. Once you pick your font, make sure to update WezTerm's config file.
+Install your Nerd Font. I'm using the Caskaydia Cove [Nerd Font](https://www.nerdfonts.com/) but you can pick any other nerd font you like. Make sure you're _not_ using the "Mono" version of your font because the symbols and icons won't resize properly. Once you pick your font, make sure to update WezTerm's config file.
 
 On Mac:
 
 ```bash
-brew install --cask font-meslo-lg-nerd-font
+brew install --cask font-caskaydia-cove-nerd-font
 ```
 
 On linux:
 
 ```bash
 brew tap homebrew/linux-fonts
-brew install font-meslo-lg-nerd-font
+brew install font-caskaydia-cove-nerd-font
 ```
 
 Open WezTerm and it should automatically pick up its config file, and the terminal UI should automatically load all our configs from the `.zshrc` file.
