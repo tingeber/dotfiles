@@ -72,6 +72,7 @@ local process_icons = {
   ['ruby'] = wezterm.nerdfonts.cod_ruby,
 	['node'] = wezterm.nerdfonts.dev_nodejs_small,
 	['npm'] = wezterm.nerdfonts.dev_npm,
+	['micro'] = 'µ'
 }
 
 local function get_current_working_dir(tab)
@@ -95,35 +96,100 @@ local function get_process(tab)
   return process_icons[process_name] or string.format('[%s]', process_name)
 end
 
-wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
-  local has_unseen_output = false
-  if not tab.is_active then
-    for _, pane in ipairs(tab.panes) do
-      if pane.has_unseen_output then
-        has_unseen_output = true
-        break
+wezterm.on(
+	'format-tab-title',
+	function(tab, tabs, panes, config, hover, max_width)
+		local colours = config.resolved_palette.tab_bar
+
+    local active_tab_index = 0
+    for _, t in ipairs(tabs) do
+      if t.is_active == true then
+        active_tab_index = t.tab_index
       end
     end
-  end
 
-  local cwd = wezterm.format({
-    { Text = get_current_working_dir(tab) },
-  })
-
-  local process = get_process(tab)
-  local title = process and string.format(' %s (%s) ', process, cwd) or ' [?] '
-
-  if has_unseen_output then
-    return {
-      { Foreground = { Color = '#28719c' } },
-      { Text = title },
+    -- TODO: make colors configurable
+    local rainbow = {
+      -- config.resolved_palette.ansi[2],
+      config.resolved_palette.indexed[16],
+      config.resolved_palette.ansi[4],
+      config.resolved_palette.ansi[3],
+      config.resolved_palette.ansi[5],
+      config.resolved_palette.ansi[6],
     }
-  end
 
-  return {
-    { Text = title },
-  }
-end)
+    local i = tab.tab_index % 6
+    local active_bg = rainbow[i + 1]
+    local active_fg = colours.background
+    local inactive_bg = colours.inactive_tab.bg_color
+    local inactive_fg = colours.inactive_tab.fg_color
+    local new_tab_bg = colours.new_tab.bg_color
+
+    local s_bg, s_fg, e_bg, e_fg
+
+    -- the last tab
+    if tab.tab_index == #tabs - 1 then
+      if tab.is_active then
+        s_bg = active_bg
+        s_fg = active_fg
+        e_bg = new_tab_bg
+        e_fg = active_bg
+      else
+        s_bg = inactive_bg
+        s_fg = inactive_fg
+        e_bg = new_tab_bg
+        e_fg = inactive_bg
+      end
+    elseif tab.tab_index == active_tab_index - 1 then
+      s_bg = inactive_bg
+      s_fg = inactive_fg
+      e_bg = rainbow[(i + 1) % 6 + 1]
+      e_fg = inactive_bg
+    elseif tab.is_active then
+      s_bg = active_bg
+      s_fg = active_fg
+      e_bg = inactive_bg
+      e_fg = active_bg
+    else
+      s_bg = inactive_bg
+      s_fg = inactive_fg
+      e_bg = inactive_bg
+      e_fg = inactive_bg
+    end
+
+
+		local has_unseen_output = false
+		for _, pane in ipairs(tab.panes) do
+			if pane.has_unseen_output then
+				has_unseen_output = true
+				break
+			end
+		end
+
+
+		local cwd = wezterm.format({
+			{ Text = get_current_working_dir(tab) },
+		})
+
+		local process = get_process(tab)
+		local title = process and string.format(' %s %s ', process, cwd) or ' [?] '
+
+		if has_unseen_output then
+			return {
+				{ Foreground = { Color = config.resolved_palette.ansi[6]}},
+				{ Text = title },
+			}
+		end
+
+		return {
+			{ Background = { Color = s_bg } },
+      { Foreground = { Color = s_fg } },
+      { Text = title },
+      { Background = { Color = e_bg } },
+      { Foreground = { Color = e_fg } },
+		}
+	end
+)
 
 
 -- config.font = wezterm.font("MesloLGS Nerd Font")
@@ -137,9 +203,10 @@ config.default_cursor_style = 'SteadyUnderline'
 -- Acceptable values are SteadyBlock, BlinkingBlock, SteadyUnderline, BlinkingUnderline, SteadyBar, and BlinkingBar
 
 -- config.enable_tab_bar = false
-config.hide_tab_bar_if_only_one_tab = true
+-- config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
-config.use_fancy_tab_bar = true
+config.use_fancy_tab_bar = false
+config.tab_max_width = 32
 
 config.window_decorations = "RESIZE"
 -- config.window_background_opacity = 0.9
@@ -147,39 +214,38 @@ config.window_decorations = "RESIZE"
 
 
 -- a plugin for a pretty tab, with cattpuccin
-wezterm.plugin.require("https://github.com/nekowinston/wezterm-bar").apply_to_config(config, {
-  position = "bottom",
-  max_width = 32,
-  dividers = "slant_right", -- or "slant_left", "arrows", "rounded", false
-  indicator = {
-    leader = {
-      enabled = false,
-      off = " ",
-      on = " ",
-    },
-    mode = {
-      enabled = false,
-      names = {
-        resize_mode = "RESIZE",
-        copy_mode = "VISUAL",
-        search_mode = "SEARCH",
-      },
-    },
-  },
-  tabs = {
-		dividers = "slant right",
-    numerals = "arabic", -- or "roman"
-    pane_count = "superscript", -- or "subscript", false
-    brackets = {
-      active = { "", ":" },
-      inactive = { "", ":" },
-    },
-  },
-  clock = { -- note that this overrides the whole set_right_status
-    enabled = true,
-    format = "%H:%M", -- use https://wezfurlong.org/wezterm/config/lua/wezterm.time/Time/format.html
-  },
-})
+-- wezterm.plugin.require("https://github.com/nekowinston/wezterm-bar").apply_to_config(config, {
+--   position = "bottom",
+--   max_width = 32,
+--   dividers = "slant_right", -- or "slant_left", "arrows", "rounded", false
+--   indicator = {
+--     leader = {
+--       enabled = false,
+--       off = " ",
+--       on = " ",
+--     },
+--     mode = {
+--       enabled = false,
+--       names = {
+--         resize_mode = "RESIZE",
+--         copy_mode = "VISUAL",
+--         search_mode = "SEARCH",
+--       },
+--     },
+--   },
+--   tabs = {
+--     numerals = "arabic", -- or "roman"
+--     pane_count = "superscript", -- or "subscript", false
+--     brackets = {
+--       active = { "", ":" },
+--       inactive = { "", ":" },
+--     },
+--   },
+--   clock = { -- note that this overrides the whole set_right_status
+--     enabled = true,
+--     format = "%H:%M", -- use https://wezfurlong.org/wezterm/config/lua/wezterm.time/Time/format.html
+--   },
+-- })
 
 
 
