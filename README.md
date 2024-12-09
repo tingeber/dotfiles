@@ -127,10 +127,10 @@ If you're running on Mac, you should be able to follow these steps and have your
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Install all apps:
+Install all apps and plugins:
 
 ```bash
-brew install wezterm git stow zsh-autosuggestions zsh-syntax-highlighting eza zoxide gh starship
+brew install wezterm git stow zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search eza zoxide gh starship
 ```
 
 Clone this repo inside your home folder and run stow from it:

@@ -14,27 +14,7 @@ local config = wezterm.config_builder()
 
 config.color_scheme = 'Catppuccin Frappe'
 
--- let's give each tab a directory name
 
-function basename(s)
-	local string = tostring(s)
-  return string.gsub(string, '(.*[/\\])(.*)', '%2')
-end
-
--- This function returns the suggested title for a tab.
--- It prefers the title that was set via `tab:set_title()`
--- or `wezterm cli set-tab-title`, but falls back to the
--- title of the active pane in that tab.
-function tab_title(tab_info)
-  local title = tab_info.tab_title
-  -- if the tab title is explicitly set, take that
-  -- if title and #title > 0 then
-  --   return title
-  -- end
-  -- Otherwise, use the title from the active pane
-  -- in that tab
-  return basename(tab_info.active_pane.current_working_dir)
-end
 
 
 -- tabs have current folder and process icon
@@ -72,7 +52,8 @@ local process_icons = {
   ['ruby'] = wezterm.nerdfonts.cod_ruby,
 	['node'] = wezterm.nerdfonts.dev_nodejs_small,
 	['npm'] = wezterm.nerdfonts.dev_npm,
-	['micro'] = 'µ'
+	['micro'] = 'µ',
+  ['htop'] = wezterm.nerdfonts.cod_dashboard
 }
 
 local function get_current_working_dir(tab)
@@ -99,8 +80,14 @@ end
 wezterm.on(
 	'format-tab-title',
 	function(tab, tabs, panes, config, hover, max_width)
+    -- heavily modified right-slanted rainbow palette for tab bars
+    -- works with catpuccin frappe colors
+    -- thanks to https://github.com/nekowinston/wezterm-bar/blob/main/plugin/init.lua
+
+    -- grab colors
 		local colours = config.resolved_palette.tab_bar
 
+    -- identify the active tab
     local active_tab_index = 0
     for _, t in ipairs(tabs) do
       if t.is_active == true then
@@ -108,9 +95,9 @@ wezterm.on(
       end
     end
 
-    -- TODO: make colors configurable
+    -- make a rainbow palette
     local rainbow = {
-      -- config.resolved_palette.ansi[2],
+      config.resolved_palette.ansi[2],
       config.resolved_palette.indexed[16],
       config.resolved_palette.ansi[4],
       config.resolved_palette.ansi[3],
@@ -118,6 +105,7 @@ wezterm.on(
       config.resolved_palette.ansi[6],
     }
 
+    -- assign the rainbow palette to up to 6 tabs, then repeat
     local i = tab.tab_index % 6
     local active_bg = rainbow[i + 1]
     local active_fg = colours.background
@@ -127,7 +115,6 @@ wezterm.on(
 
     local s_bg, s_fg, e_bg, e_fg
 
-    -- the last tab
     if tab.tab_index == #tabs - 1 then
       if tab.is_active then
         s_bg = active_bg
@@ -157,7 +144,7 @@ wezterm.on(
       e_fg = inactive_bg
     end
 
-
+    -- check if there's unseen output in an inactive tab
 		local has_unseen_output = false
 		for _, pane in ipairs(tab.panes) do
 			if pane.has_unseen_output then
@@ -166,34 +153,97 @@ wezterm.on(
 			end
 		end
 
-
+    -- grab the directory name and clean it up, and get the process name
 		local cwd = wezterm.format({
 			{ Text = get_current_working_dir(tab) },
 		})
-
 		local process = get_process(tab)
 		local title = process and string.format(' %s %s ', process, cwd) or ' [?] '
 
+    -- change text color of inactive tabs if there's unseen activity
 		if has_unseen_output then
 			return {
+        { Background = { Color = s_bg } },
 				{ Foreground = { Color = config.resolved_palette.ansi[6]}},
 				{ Text = title },
+        { Background = { Color = e_bg } },
+        { Foreground = { Color = e_fg } },
+        {Text = utf8.char(0xe0bc)}
 			}
 		end
 
+    -- print a pretty slanted rainbow colored tab with process and directory name
 		return {
 			{ Background = { Color = s_bg } },
       { Foreground = { Color = s_fg } },
       { Text = title },
       { Background = { Color = e_bg } },
       { Foreground = { Color = e_fg } },
+      {Text = utf8.char(0xe0bc)}
 		}
 	end
 )
 
+-- wezterm.on('update-right-status', function(window, pane)
+--   local cwd_uri = pane:get_current_working_dir()
 
--- config.font = wezterm.font("MesloLGS Nerd Font")
--- config.font = wezterm.font("FiraCode Nerd Font")
+
+--   -- I like my date/time in this style: "Wed Mar 3 08:14"
+--   local date = wezterm.strftime '%a %b %-d %H:%M'
+--   table.insert(cells, date)
+
+--   window:set_right_status(wezterm.format{{ Text = cwd_uri }})
+-- end)
+
+wezterm.on('update-right-status', function(window, pane)
+  local cwd_uri = pane:get_current_working_dir()
+  local domain = pane:get_domain_name()
+  -- local inactiveColor = config.resolved_palette.tab_bar.inactive_tab.bg_color
+  -- Make it italic and underlined
+  local frappe = {
+		rosewater = "#f2d5cf",
+		flamingo = "#eebebe",
+		pink = "#f4b8e4",
+		mauve = "#ca9ee6",
+		red = "#e78284",
+		maroon = "#ea999c",
+		peach = "#ef9f76",
+		yellow = "#e5c890",
+		green = "#a6d189",
+		teal = "#81c8be",
+		sky = "#99d1db",
+		sapphire = "#85c1dc",
+		blue = "#8caaee",
+		lavender = "#babbf1",
+		text = "#c6d0f5",
+		subtext1 = "#b5bfe2",
+		subtext0 = "#a5adce",
+		overlay2 = "#949cbb",
+		overlay1 = "#838ba7",
+		overlay0 = "#737994",
+		surface2 = "#626880",
+		surface1 = "#51576d",
+		surface0 = "#414559",
+		base = "#303446",
+		mantle = "#292c3c",
+		crust = "#232634",
+	}
+
+  window:set_right_status(wezterm.format {
+    { Background = { Color = frappe.surface0}},
+    { Foreground = { Color = frappe.crust}},
+    {Text = utf8.char(0xe0bc)},
+    -- {Attribute={Italic=true}},
+    { Background = { Color = frappe.surface0}},
+    { Foreground = { Color = frappe.lavender}},
+    { Text = ' ' ..cwd_uri.file_path.. ' ' },
+    -- { Text = ' ' ..domain.. ' ' },
+    -- { Background = { Color = config.resolved_palette.ansi[2]}},
+    -- { Foreground = { Color = config.resolved_palette.ansi[6]}},
+  })
+end)
+
+-- font config
 config.font = wezterm.font("CaskaydiaCove Nerd Font")
 config.font_size = 14
 config.line_height = 1.2
@@ -211,41 +261,6 @@ config.tab_max_width = 32
 config.window_decorations = "RESIZE"
 -- config.window_background_opacity = 0.9
 -- config.macos_window_background_blur = 8
-
-
--- a plugin for a pretty tab, with cattpuccin
--- wezterm.plugin.require("https://github.com/nekowinston/wezterm-bar").apply_to_config(config, {
---   position = "bottom",
---   max_width = 32,
---   dividers = "slant_right", -- or "slant_left", "arrows", "rounded", false
---   indicator = {
---     leader = {
---       enabled = false,
---       off = " ",
---       on = " ",
---     },
---     mode = {
---       enabled = false,
---       names = {
---         resize_mode = "RESIZE",
---         copy_mode = "VISUAL",
---         search_mode = "SEARCH",
---       },
---     },
---   },
---   tabs = {
---     numerals = "arabic", -- or "roman"
---     pane_count = "superscript", -- or "subscript", false
---     brackets = {
---       active = { "", ":" },
---       inactive = { "", ":" },
---     },
---   },
---   clock = { -- note that this overrides the whole set_right_status
---     enabled = true,
---     format = "%H:%M", -- use https://wezfurlong.org/wezterm/config/lua/wezterm.time/Time/format.html
---   },
--- })
 
 
 

@@ -18,10 +18,12 @@ if [[ "$(uname -p)" == "arm" ]]; then
 fi
 
 # ------------------
-# zsh autosuggestions and syntax highlighting
+# zsh plugins:
+# autosuggestions, syntax highlighting, history
 # ------------------
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # ------------------
 # history setup
@@ -37,8 +39,10 @@ setopt hist_verify
 # ------------------
 # completion using arrow keys (based on history)
 # ------------------
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
+# bindkey '^[[A' history-search-backward
+# bindkey '^[[B' history-search-forward
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 
 export EDITOR='micro'
@@ -64,6 +68,7 @@ alias gs='echo ""; echo "*********************************************"; echo -e
 # ---- Eza (better ls) -----
 
 alias ls="eza --icons=always"
+alias lt="eza --tree --icons=always"
 
 
 # ---- Zoxide (better cd) ----
