@@ -53,6 +53,7 @@ export EDITOR='micro'
 alias l="ls" # List files in current directory
 alias ll="ls -al" # List all files in current directory in long list format
 alias o="open ." # Open the current directory in Finder
+alias gg="code . && npm run dev" # open VSCode and start the dev server
 
 # ----------------------
 # Git Aliases
@@ -76,5 +77,25 @@ eval "$(zoxide init zsh)"
 
 alias cd="z"
 
+# ---- Yazi config ----
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+
 # ---- Starship for a pretty prompt ----
 eval "$(starship init zsh)"
+eval "$(atuin init zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/tin/.cache/lm-studio/bin"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
