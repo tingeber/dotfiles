@@ -8,7 +8,7 @@ set -eo pipefail
 
 # Global variables
 version="0.2"
-brewapps="zsh micro stow zsh-autosuggestions zsh-syntax-highlighting eza zoxide tlrc starship"
+brewapps="zsh micro stow zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search eza zoxide tlrc starship"
 brewfolder="/home/linuxbrew/.linuxbrew"
 user="tin" #change to your username on the VPS.
 
