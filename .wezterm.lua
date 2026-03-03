@@ -15,6 +15,22 @@ local config = wezterm.config_builder()
 config.color_scheme = 'Catppuccin Frappe'
 
 
+local act = wezterm.action
+
+config.keys = {
+  -- Option+Left: move word back
+  { key = 'LeftArrow', mods = 'OPT', action = act.SendKey { key = 'b', mods = 'ALT' } },
+  -- Option+Right: move word forward
+  { key = 'RightArrow', mods = 'OPT', action = act.SendKey { key = 'f', mods = 'ALT' } },
+  -- Cmd+Left: jump to beginning of line
+  { key = 'LeftArrow', mods = 'CMD', action = act.SendKey { key = 'a', mods = 'CTRL' } },
+  -- Cmd+Right: jump to end of line
+  { key = 'RightArrow', mods = 'CMD', action = act.SendKey { key = 'e', mods = 'CTRL' } },
+  -- Option+Backspace: delete word back
+  { key = 'Backspace', mods = 'OPT', action = act.SendKey { key = 'w', mods = 'CTRL' } },
+  -- Cmd+Backspace: delete to beginning of line
+  { key = 'Backspace', mods = 'CMD', action = act.SendKey { key = 'u', mods = 'CTRL' } },
+}
 
 
 -- tabs have current folder and process icon
@@ -261,8 +277,6 @@ config.tab_max_width = 32
 config.window_decorations = "RESIZE"
 -- config.window_background_opacity = 0.9
 -- config.macos_window_background_blur = 8
-
-
 
 
 -- and finally, return the configuration to wezterm
