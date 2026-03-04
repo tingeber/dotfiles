@@ -9,14 +9,6 @@ if [[ "$(uname)" == "Linux" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# Setup for Arm Mac
-if [[ "$(uname -p)" == "arm" ]]; then
-  # Connecting to nvm
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
-
 # ------------------
 # zsh plugins:
 # autosuggestions, syntax highlighting, history
@@ -73,8 +65,7 @@ alias ls="eza --icons=always"
 alias lt="eza --tree --icons=always"
 
 
-# ---- Zoxide (better cd) ----
-eval "$(zoxide init zsh)"
+
 
 alias cd="z"
 
@@ -93,10 +84,10 @@ function y() {
 eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/tin/.cache/lm-studio/bin"
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+
+# ---- Mise (runtime manager) ----
+eval "$(mise activate zsh)"
+
+# ---- Zoxide (better cd) ----
+eval "$(zoxide init zsh)"

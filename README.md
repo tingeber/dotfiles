@@ -29,6 +29,7 @@ Also feel free to open issues or propose PRs.
 | **Package Manager** | Homebrew         | Homebrew             |
 | **Theme**           | Catpuccin Frappé | Catpuccin Frappé     |
 | **Prompt UI**       | Starship         | Starship             |
+| **Runtime Manager** | mise             | mise                 |
 
 ### Zsh
 
@@ -41,6 +42,7 @@ These are the quality of life tools I use to improve my terminal experience:
 - [tldr](https://tldr.sh): awesome short condensed replacement for `--help` and `man` pages. For when you just need a quick reminder how `curl` works
 - [micro](https://micro-editor.github.io): a file editor for the Terminal that acts like a desktop app so i don't have to memorize new shortcuts. I mean, one day I will fully commit to Neovim, but that day isn't today
 - [Starship](https://starship.rs): cross-platform customizable prompt. I used to use `p10k` as a plugin for `oh-my-zsh`, then I removed `oh-my-zsh` and ran vanilla `p10k`, then I discovered Starship and, after a couple of rocky starts, I fully committed. Again, mainly because it's fully customizable through a text config file.
+- [mise](https://mise.jdx.dev): a single tool to manage runtime versions (Node, Python, etc.), replacing nvm and pyenv. Faster shell startup since it's one `eval` instead of multiple slow inits.
 - [stow](https://www.gnu.org/software/stow/manual/stow.html): a symlink manager aka the reason this dotfiles repo is possible in the first place.
 
 ### Let's talk about `stow`
@@ -130,7 +132,7 @@ If you're running on Mac, you should be able to follow these steps and have your
 Install all apps and plugins:
 
 ```bash
-brew install wezterm git stow zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search eza zoxide gh starship
+brew install wezterm git stow zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search eza zoxide gh starship mise
 ```
 
 Clone this repo inside your home folder and run stow from it:
