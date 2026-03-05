@@ -65,7 +65,7 @@ disable = ["system", "containers"]
 # tmux_session_mode = "attach_if_not_in_session"
 
 # Cleanup temporary or old files (default: false)
-# cleanup = true
+cleanup = true
 
 # Send a notification for every step (default: false)
 # notify_each_step = false
@@ -164,7 +164,7 @@ disable = ["system", "containers"]
 
 # For the BrewFormula step
 # Execute `brew autoremove` after the step.
-# autoremove = true
+autoremove = true
 
 # For the BrewFormula step
 # Upgrade formulae built from the HEAD branch; `brew upgrade --fetch-HEAD`
@@ -296,7 +296,7 @@ disable = ["system", "containers"]
 [mise]
 # Upgrades to the latest version available, bumping the version in mise.toml
 # (default: false)
-# bump = false
+bump = true
 
 # Number of jobs to run in parallel
 # (default: 4)
